@@ -1,15 +1,12 @@
 package com.example.calcetto.model;
 
 import javax.persistence.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(schema = "calcetto",name = "tb_prenotazione")
 public class TbPrenotazione
 {
-
     @Id
     @Column(name = "prenotazioneId")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -24,8 +21,8 @@ public class TbPrenotazione
     @JoinColumn(name = "utenteId")
     private TbUtente fromUtente;
     @ManyToOne
-    @JoinColumn(name = "gestoreId")
-    private TbGestore fromGestore;
+    @JoinColumn(name = "attivitaId")
+    private TbAttivita fromAttivita;
 
 
     public Long getPrenotazioneId() {
@@ -43,8 +40,8 @@ public class TbPrenotazione
     public TbUtente getFromUtente() {
         return fromUtente;
     }
-    public TbGestore getFromGestore() {
-        return fromGestore;
+    public TbAttivita getFromAttivita() {
+        return fromAttivita;
     }
 
     public void setPrenotazioneId(Long prenotazioneId) {
@@ -62,7 +59,7 @@ public class TbPrenotazione
     public void setFromUtente(TbUtente fromUtente) {
         this.fromUtente = fromUtente;
     }
-    public void setFromGestore(TbGestore fromGestore) {
-        this.fromGestore = fromGestore;
+    public void setFromAttivita(TbAttivita fromAttivita) {
+        this.fromAttivita = fromAttivita;
     }
 }

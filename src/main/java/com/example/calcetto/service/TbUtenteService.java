@@ -1,12 +1,15 @@
 package com.example.calcetto.service;
 
+import com.example.calcetto.model.TbAttivita;
 import com.example.calcetto.model.TbGestore;
 import com.example.calcetto.model.TbUtente;
+import com.example.calcetto.repository.TbAttivitaRepository;
 import com.example.calcetto.repository.TbGestoreRepository;
 import com.example.calcetto.repository.TbUtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.sasl.AuthenticationException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,8 @@ public class TbUtenteService
     TbUtenteRepository repo;
     @Autowired
     TbGestoreRepository repoGestore;
+    @Autowired
+    TbAttivitaRepository repoAttivita;
     public TbUtente save(TbUtente data) throws Exception {
         TbUtente result;
         try {
@@ -38,16 +43,6 @@ public class TbUtenteService
         }
         return null;
     }
-    public List<TbGestore> visualizzaDisponibili() throws Exception
-    {
-        List<TbGestore> result = new ArrayList<TbGestore>();
-        try {
-            result = repoGestore.disponibilita();
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-        return result;
-    }
     public List<TbGestore> localita(String citta) throws Exception
     {
         List<TbGestore> result = new ArrayList<TbGestore>();
@@ -61,17 +56,41 @@ public class TbUtenteService
         }
         return result;
     }
-    public List<TbGestore> findByPrezzo(String prezzo) throws Exception
+    public List<TbAttivita> findByPrezzo(String prezzo) throws Exception
     {
-        List<TbGestore> result = new ArrayList<TbGestore>();
+        List<TbAttivita> result = new ArrayList<TbAttivita>();
         try
         {
-            result = repoGestore.findByPrezzo(prezzo);
+            result = repoAttivita.findByPrezzo(prezzo);
         }
         catch (Exception e)
         {
             throw new Exception(e.getMessage());
         }
         return result;
+    }
+    public String getPasswordByUser(String nome) {
+
+        String result = repo.getPasswordByUser(nome);
+        return result;
+
+    }
+
+    public TbUtente logIn(String nome, String password) throws Exception {
+
+        TbUtente result = null;
+
+        try {
+            result = repo.logIn(nome, password);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+        if (result == null) {
+            throw new AuthenticationException("Invalid credential");
+        }
+
+        return result;
+
     }
 }

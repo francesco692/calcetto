@@ -1,8 +1,8 @@
 package com.example.calcetto.controller;
 
 import com.example.calcetto.model.ResponseDTO;
-import com.example.calcetto.model.TbPrenotazione;
-import com.example.calcetto.service.TbPrenotazioneService;
+import com.example.calcetto.model.TbTipoAttivita;
+import com.example.calcetto.service.TbTipoAttivitaService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,19 +13,19 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/prenotazione")
-public class PrenotazioneController extends BaseController{
-    @Autowired
-    TbPrenotazioneService service;
+@RequestMapping("/tipoAttivita")
+public class TipoAttivitaController extends BaseController {
 
-    @PostMapping("/insertPrenotazione")
-    @ApiOperation(value = "aggiunta o modifica di una riga sulla tabella prenotazione", notes = "", response = ResponseDTO.class)
-    public ResponseEntity<ResponseDTO> save(@RequestBody TbPrenotazione data) throws Exception
+    @Autowired
+    TbTipoAttivitaService service;
+    @PostMapping("/insertTipoAttivita")
+    @ApiOperation(value = "aggiunta o modifica di una riga sulla tabella tipo attivita", notes = "", response = ResponseDTO.class)
+    public ResponseEntity<ResponseDTO> save(@RequestBody TbTipoAttivita data) throws Exception
     {
         ResponseDTO response = new ResponseDTO();
         try
         {
-            TbPrenotazione result = service.save(data);
+            TbTipoAttivita result = service.save(data);
             response = setResponse(response, result, "dati salvati correttamente");
         }
         catch (Exception e)
@@ -35,13 +35,13 @@ public class PrenotazioneController extends BaseController{
         return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
     }
     @PostMapping("/delete")
-    @ApiOperation(value = "eliminazione di un elemento dalla tabella prenotazione", notes = "", response = ResponseDTO.class)
-    public ResponseEntity<ResponseDTO> deletePrenotazione(@RequestBody Map<String,Long> body) throws Exception
+    @ApiOperation(value = "eliminazione di un elemento dalla tabella tipo attivita", notes = "", response = ResponseDTO.class)
+    public ResponseEntity<ResponseDTO> deleteTipoAttivita(@RequestBody Map<String,Long> body) throws Exception
     {
         ResponseDTO response = new ResponseDTO();
         try
         {
-            TbPrenotazione result = service.deletePrenotazione(body.get("prenotazioneId"));
+            TbTipoAttivita result = service.deleteTipoAttivita(body.get("tipoAttivitaId"));
             response = setResponse(response, result, "dati eliminati con successo");
         }
         catch (Exception e)

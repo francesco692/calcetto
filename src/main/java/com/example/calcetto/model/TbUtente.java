@@ -19,6 +19,14 @@ public class TbUtente {
     private String telefono;
     @Column(name = "email")
     private String email;
+    @OneToOne
+    @JoinColumn(name = "tipoUtenteId")
+    private TbTipoUtente fromTipoUtente;
+    @OneToOne
+    @JoinColumn(name = "gestoreId")
+    private TbGestore fromGestore;
+    @Column(name = "password")
+    private String password;
 
 
     public Long getUtenteId() {
@@ -36,8 +44,15 @@ public class TbUtente {
     public String getEmail() {
         return email;
     }
-
-
+    public TbTipoUtente getFromTipoUtente() {
+        return fromTipoUtente;
+    }
+    public TbGestore getFromGestore() {
+        return fromGestore;
+    }
+    public String getPassword() {
+        return password;
+    }
     public void setUtenteId(Long utenteId) {
         this.utenteId = utenteId;
     }
@@ -53,5 +68,13 @@ public class TbUtente {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    public void setFromTipoUtente(TbTipoUtente fromTipoUtente) {
+        this.fromTipoUtente = fromTipoUtente;
+    }
+    public void setFromGestore(TbGestore fromGestore) {
+        this.fromGestore = fromGestore;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -12,8 +12,6 @@ public class TbGestore implements Serializable
     @Column(name = "gestoreId")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long gestoreId;
-    @Column(name = "prezzo")
-    private String prezzo;
     @Column(name = "indirizzo")
     private String indirizzo;
     @Column(name = "citta")
@@ -22,8 +20,9 @@ public class TbGestore implements Serializable
     private Date oraApertura;
     @Temporal(TemporalType.TIMESTAMP)
     private Date oraChiusura;
-    @Column(name = "isDisponibile")
-    private boolean isDisponibile;
+    @ManyToOne
+    @JoinColumn(name = "attivitaId")
+    private TbAttivita fromAttivita;
 
 
     public Long getGestoreId() {
@@ -31,9 +30,6 @@ public class TbGestore implements Serializable
     }
     public String getIndirizzo() {
         return indirizzo;
-    }
-    public String getPrezzo() {
-        return prezzo;
     }
     public String getCitta() {
         return citta;
@@ -44,16 +40,12 @@ public class TbGestore implements Serializable
     public Date getOraChiusura() {
         return oraChiusura;
     }
-    public boolean isDisponibile() {
-        return isDisponibile;
+    public TbAttivita getFromAttivita() {
+        return fromAttivita;
     }
-
 
     public void setGestoreId(Long gestoreId) {
         this.gestoreId = gestoreId;
-    }
-    public void setPrezzo(String prezzo) {
-        this.prezzo = prezzo;
     }
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
@@ -67,7 +59,7 @@ public class TbGestore implements Serializable
     public void setOraChiusura(Date oraChiusura) {
         this.oraChiusura = oraChiusura;
     }
-    public void setDisponibile(boolean disponibile) {
-        isDisponibile = disponibile;
+    public void setFromAttivita(TbAttivita fromAttivita) {
+        this.fromAttivita = fromAttivita;
     }
 }
