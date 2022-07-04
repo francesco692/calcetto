@@ -15,7 +15,7 @@ public class TbUtenteCustomRepositoryImpl implements TbUtenteCustomRepository {
 
         String result = "";
 
-        Query q = em.createNativeQuery("select password from tb_utente tu where tu.nome = '" + nome + "'");
+        Query q = em.createNativeQuery("select tu.password from tb_utente tu where tu.nome = '" + nome + "'");
 
         result = q.getSingleResult().toString();
 
@@ -28,7 +28,7 @@ public class TbUtenteCustomRepositoryImpl implements TbUtenteCustomRepository {
         List<TbUtente> result = null;
 
         Query q = em.createNativeQuery(
-                "select * from tb_utente tu where 1=1 and tu.cessato <> 1 "
+                "select * from tb_utente tu where 1=1 "
                         + "and tu.nome = '" + nome + "' && tu.password = '" + password + "'",
                 TbUtente.class);
         result = q.getResultList();

@@ -16,10 +16,10 @@ public class JwtUserDetailsService implements UserDetailsService {
     TbUtenteService service;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String nome) throws UsernameNotFoundException {
 
-        String password = service.getPasswordByUser(username);
-        return new User(username, password,
+        String password = service.getPasswordByUser(nome);
+        return new User(nome, password,
                 new ArrayList<>());
     }
 
